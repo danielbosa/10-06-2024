@@ -1,35 +1,35 @@
 <template>
   <h1 class="text-center">Ciao</h1>
   <i class="fa fa-solid fa-home"></i>
+
   <ul>
-    <li v-for="project in projects" :key="project.id">{{ project.title }}
-      <img :src="store.imagBasePath + project.image" :alt="project.title">
+    <li v-for="(item, index) in menuItems" :key="index">
+      <router-link :to="{ name: item.routeName}" class="nav-link">
+        {{ item.label }}
+      </router-link>
     </li>
   </ul>
+
+  <router-view></router-view>
 </template>
 
 <script>
-  import {store} from './store.js';
-  import axios from 'axios';
+
   export default {
     name: 'App',
     data(){
       return{
-        store,
-        projects : []
+        menuItems: [
+          {
+            label: 'Home',
+            routeName: 'home'
+          },
+          {
+            label: 'Projects',
+            routeName: 'projects'
+          }
+        ]
       }
-    },
-    methods: {
-      getAllProjects(){
-        axios.get(this.store.apiBaseUrl + '/projects').then((res) =>{
-          console.log(res.data)
-          this.projects = res.data.results;
-
-        })
-      }
-    },
-    mounted(){
-      this.getAllProjects();
     }
   }
 </script>
