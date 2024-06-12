@@ -1,36 +1,20 @@
 <template>
-  <h1 class="text-center">Ciao</h1>
-  <i class="fa fa-solid fa-home"></i>
 
-  <ul>
-    <li v-for="(item, index) in menuItems" :key="index">
-      <router-link :to="{ name: item.routeName}" class="nav-link" activeClass="active">
-        {{ item.label }}
-      </router-link>
-    </li>
-  </ul>
-
-  <router-view></router-view>
+  <HeaderComponent/>
+  <main class="container my-4">
+    <router-view></router-view>
+  </main>
+  
 </template>
 
 <script>
-
+  import HeaderComponent from './components/HeaderComponent.vue'
   export default {
     name: 'App',
-    data(){
-      return{
-        menuItems: [
-          {
-            label: 'Home',
-            routeName: 'home'
-          },
-          {
-            label: 'Projects',
-            routeName: 'projects'
-          }
-        ]
-      }
-    }
+    components: {
+      HeaderComponent
+    },
+    
   }
 </script>
 
